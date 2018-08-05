@@ -1,0 +1,55 @@
+        -:    0:Source:cardtest1.c
+        -:    0:Graph:cardtest1.gcno
+        -:    0:Data:cardtest1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include <string.h>
+        -:    4:#include <stdio.h>
+        -:    5:#include <assert.h>
+        -:    6:#include "rngs.h"
+        -:    7:#include <stdlib.h>
+        -:    8:
+        -:    9:
+        1:   10:int main(){
+        1:   11:   int seed = 1000;
+        1:   12:   int numPlayers = 2;
+        -:   13:
+        1:   14:     int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
+        -:   15:
+        -:   16:   struct gameState G, G1;
+        1:   17:   memset(&G, 23, sizeof(struct gameState));
+        1:   18:    memset(&G1, 23, sizeof(struct gameState));
+        -:   19:
+        1:   20:   initializeGame(numPlayers, k, seed, &G);
+        1:   21:   memcpy(&G1, &G, sizeof(struct gameState));
+        -:   22:
+        1:   23:   printf("  **  cardtest makeSmithy()  **  \n");
+        1:   24:   makeSmithy(&G1, 0, 0);
+        -:   25:   int result, result1;
+        1:   26:   result=G.handCount[0]+3;
+        1:   27:   result1=G1.handCount[0];
+        -:   28:   
+        -:   29:   /*int result2, result3;
+        -:   30:   result2=G.handCount[1];
+        -:   31:   result3=G1.handCount[1];
+        -:   32:  
+        -:   33:   printf("original player 1 hand count is %d\n", result);
+        -:   34:    printf("original player 2 hand count is %d\n", result2);
+        -:   35:    printf("new game player 1 hand count is %d\n", result1);
+        -:   36:   printf("new game player 2 hand count is %d\n", result3);
+        -:   37:  */
+        -:   38:
+        -:   39:   
+        1:   40:   if (result==result1){
+    #####:   41:     printf("Pass the test\n");
+        -:   42:   }
+        -:   43:   else{
+        1:   44:     printf("Fail the test\n");
+        -:   45:   }
+        -:   46:   
+        -:   47:
+        -:   48:
+        1:   49:return 0;
+        -:   50:}

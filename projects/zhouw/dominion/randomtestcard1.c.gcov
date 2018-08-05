@@ -1,0 +1,65 @@
+        -:    0:Source:randomtestcard1.c
+        -:    0:Graph:randomtestcard1.gcno
+        -:    0:Data:randomtestcard1.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:// tst card smithy
+        -:    2:
+        -:    3:#include "dominion.h"
+        -:    4:#include "dominion_helpers.h"
+        -:    5:#include <string.h>
+        -:    6:#include <stdio.h>
+        -:    7:#include <assert.h>
+        -:    8:#include "rngs.h"
+        -:    9:#include <stdlib.h>
+        -:   10:#include <time.h>
+        -:   11:
+        -:   12:
+        -:   13:
+        1:   14:int main(){
+        -:   15:  
+        1:   16:   int seed = 1000;
+        1:   17:   int numPlayers = 2;
+        -:   18:   int player;
+        -:   19:   int numAfter;
+        -:   20:   
+        -:   21:   int deckCount;
+        -:   22:   int handCount;
+        1:   23:   int p=0;
+        -:   24:
+        -:   25:
+        1:   26:   int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
+        -:   27:
+        -:   28:   struct gameState G;
+        1:   29:   memset(&G, 23, sizeof(struct gameState));
+        -:   30:  
+        -:   31:
+        1:   32:   srand(time(NULL));
+        -:   33:   int i;
+     1001:   34:   for (i=0; i<1000; i++){
+        -:   35:
+     1000:   36:   initializeGame(numPlayers, k, seed, &G);
+        -:   37:
+     1000:   38:   player=rand()%numPlayers;  // random player 0 or 1
+     1000:   39:   deckCount=rand()%(MAX_DECK+1); // random deckCount
+     1000:   40:   handCount=rand()%(deckCount+1);// rand handCount
+        -:   41: 
+     1000:   42:   G.handCount[player]=handCount;
+        -:   43:
+     1000:   44:   makeSmithy(&G, player, 0); 
+        -:   45:
+     1000:   46:   numAfter=G.handCount[player];
+        -:   47:
+     1000:   48:           if (numAfter-3!= handCount){
+     1000:   49:                p++;}
+        -:   50:
+        -:   51:
+        -:   52:    }
+        -:   53:              int pass;
+        1:   54:             pass=1000-p;
+        1:   55:    printf("****\n");
+        1:   56:    printf("%d times failed in 1000 test\n", p);
+        1:   57:    printf("%d times passed in 1000 test\n", pass);
+        -:   58:  
+        1:   59:return 0;
+        -:   60:}

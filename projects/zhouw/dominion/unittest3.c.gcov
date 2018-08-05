@@ -1,0 +1,61 @@
+        -:    0:Source:unittest3.c
+        -:    0:Graph:unittest3.gcno
+        -:    0:Data:unittest3.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <string.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <math.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <assert.h>
+        -:    9:
+        1:   10:int main(){
+        1:   11: int seed = 1000;
+        1:   12:        int numPlayer = 2;
+        1:   13:        int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
+        -:   14:
+        1:   15:        printf("   ***   test scoreFor()  ****   \n");
+        -:   16:
+        -:   17:        struct gameState G;
+        -:   18:
+        1:   19:        memset(&G, 23, sizeof(struct gameState));
+        1:   20:        initializeGame(numPlayer, k, seed, &G);
+        -:   21:
+        -:   22:        int i;
+        1:   23:        int a=0;
+        1:   24:        int b=0;
+        1:   25:        int c=0;
+        1:   26:        int d=0;
+        1:   27:        int e=0;
+        1:   28:        int f=0;
+        -:   29:      
+        1:   30:         int score=0;
+        -:   31:
+        -:   32:
+        6:   33:        for (i=0; i<G.handCount[0];i++){
+        5:   34:            if (G.hand[0][i]==curse){a++;}
+        5:   35:            if (G.hand[0][i]==estate){b++;}
+        5:   36:            if (G.hand[0][i]==duchy){c++;}
+        5:   37:            if (G.hand[0][i]==province){d++;}
+        5:   38:            if (G.hand[0][i]==great_hall){e++;}
+        5:   39:            if(G.hand[0][i]==gardens){f++;}
+        -:   40:            
+        -:   41:           }
+        -:   42:
+        1:   43:        score=score-a+b+3*c+6*d+e+f*(fullDeckCount(0,0,&G)/10);
+        -:   44:        
+        -:   45:
+        -:   46:  /*      printf(" a b c d e f is %d %d %d %d %d %d\n", a, b, c, d, e, f);
+        -:   47:        printf("score is %d\n", score);
+        -:   48:  */
+        -:   49:
+        -:   50:       int result;
+        1:   51:       result=scoreFor(0, &G);
+        -:   52:
+        1:   53:       if (score==result){printf("Pass the test\n");}
+    #####:   54:       else {printf("Fial the test\n");}
+        1:   55:return 0;
+        -:   56:}

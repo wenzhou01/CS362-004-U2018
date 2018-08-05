@@ -1,0 +1,42 @@
+        -:    0:Source:unittest2.c
+        -:    0:Graph:unittest2.gcno
+        -:    0:Data:unittest2.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include "dominion.h"
+        -:    2:#include "dominion_helpers.h"
+        -:    3:#include "rngs.h"
+        -:    4:#include <string.h>
+        -:    5:#include <stdio.h>
+        -:    6:#include <math.h>
+        -:    7:#include <stdlib.h>
+        -:    8:#include <assert.h>
+        -:    9:
+        -:   10:// Unit test 1, test function isGameOver(struct gameState * state)
+        -:   11:
+        -:   12:
+        -:   13:
+        1:   14: int main (){
+        -:   15:
+        -:   16:
+        1:   17:         int seed = 1000;
+        1:   18:         int numPlayer = 2;
+        1:   19:         int k[10] = {adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall};
+        1:   20:         printf("   ***   test gaincard()  ****   \n");
+        -:   21:
+        -:   22:          struct gameState G;
+        -:   23:
+        1:   24:          memset(&G, 23, sizeof(struct gameState));
+        1:   25:          initializeGame(numPlayer, k, seed, &G);
+        -:   26:          
+        1:   27:          G.supplyCount[silver]=0;
+        -:   28:
+        -:   29:          int result;
+        1:   30:          result=gainCard(silver, &G, 0, 0);
+        1:   31:                           if (result==-1){
+        1:   32:         printf("pass the test 1\n");}
+        -:   33:                            else
+    #####:   34:                       {  printf("fail the test 1");
+        -:   35:                               }
+        1:   36:  return 0;
+        -:   37:}
